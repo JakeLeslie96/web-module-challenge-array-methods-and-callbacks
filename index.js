@@ -73,10 +73,9 @@ Use the higher-order function getWinnersByYear to do the following:
  */
 
 function getWinnersByYear(data, getFinalsCB, getYearsCB, getWinnersCB) {
-    
-
-
-    return `in ${year}, ${country} won the world cup!`
+    const winners = getWinnersCB(data, getFinals)
+    const year = getYearsCB(data, getFinals)
+    return winners.map((item, index)=> `In ${year[index]}, ${item} won the world cup!`)
 }
 console.log(fifaData, getFinals, getYears, getWinners)
 
@@ -95,9 +94,13 @@ Use the higher order function `getAverageGoals` to do the following:
  
 */
 
-function getAverageGoals(/* code here */) {
-    /* code here */
- }
+function getAverageGoals(finalCB) {
+    let goals = finalCB.reduce ((acc, currentValue) => {
+        return acc + currentValue["Home Team Goals"] + currentValue["Away Team Goals"]
+    }, 0)
+    return (goals / finalCB.length).toFixed(2)
+    }
+
 
 
 
